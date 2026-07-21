@@ -7,12 +7,19 @@ import { Roles } from '../auth/decorators/roles.decorator';
 
 import { DashboardService } from './dashboard.service';
 
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+
+@ApiTags('Dashboard')
+@ApiBearerAuth('JWT')
 @Controller('dashboard')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.ADMIN)
 export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 
+  @ApiOperation({
+    summary: 'Dashboard Summary',
+  })
   @Get('summary')
   getSummary() {
     return this.dashboardService.getSummary();
