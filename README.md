@@ -1,98 +1,345 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Internship Applicant Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend Internship Practical Challenge for **INFNOVA Technologies**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A RESTful API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for managing internship applications. The system provides secure JWT authentication, applicant management, search, filtering, pagination, dashboard statistics, and interactive API documentation using Swagger.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+### Authentication
 
-```bash
-$ npm install
+- JWT Authentication
+- Secure password hashing using bcrypt
+- Bearer Token Authorization
+- Role-Based Access Control (Admin)
+
+### Applicant Management
+
+- Create Applicant
+- Get All Applicants
+- Get Applicant By ID
+- Update Applicant
+- Soft Delete Applicant
+- Update Applicant Status
+- Update Internal Notes
+
+### Search & Filtering
+
+- Search by Name
+- Search by Email
+- Filter by Status
+- Filter by Internship Track
+- Sorting
+- Pagination
+
+### Dashboard
+
+Returns:
+
+- Total Applicants
+- Pending Applicants
+- Shortlisted Applicants
+- Accepted Applicants
+- Rejected Applicants
+
+### Validation & Security
+
+- DTO Validation
+- Global Validation Pipe
+- Global Exception Filter
+- UUID Validation
+- Soft Delete
+- Unique Email Validation
+
+### Documentation
+
+- Swagger / OpenAPI Documentation
+
+---
+
+# Technologies
+
+- NestJS
+- TypeScript
+- PostgreSQL
+- Prisma ORM
+- JWT
+- Passport
+- bcrypt
+- Swagger
+- Class Validator
+- Class Transformer
+
+---
+
+# Project Structure
+
+```
+src
+│
+├── auth
+├── users
+├── applicants
+├── dashboard
+├── prisma
+├── common
+│   ├── decorators
+│   ├── filters
+│   ├── guards
+│   └── interceptors
+│
+├── app.module.ts
+└── main.ts
 ```
 
-## Compile and run the project
+---
+
+# Installation
+
+Clone the repository
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/YOUR_USERNAME/internship-applicant-management-api.git
 ```
 
-## Run tests
+Move into the project
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd internship-applicant-management-api
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Install dependencies
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+# Environment Variables
 
-Check out a few resources that may come in handy when working with NestJS:
+Create a `.env` file.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Example:
 
-## Support
+```env
+PORT=3000
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+NODE_ENV=development
 
-## Stay in touch
+DATABASE_URL=postgresql://postgres:password@localhost:5432/internship_applicant_db?schema=public
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+JWT_SECRET=your_super_secret_key
 
-## License
+JWT_EXPIRES_IN=1d
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+# Database
+
+Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+Run Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+Seed Database
+
+```bash
+npx prisma db seed
+```
+
+---
+
+# Running the Project
+
+Development
+
+```bash
+npm run start:dev
+```
+
+Production
+
+```bash
+npm run build
+
+npm run start:prod
+```
+
+---
+
+# Swagger Documentation
+
+Open
+
+```
+http://localhost:3000/docs
+```
+
+Use the **Authorize** button and paste your JWT token.
+
+Example
+
+```
+Bearer eyJhbGciOiJIUzI1NiIs...
+```
+
+---
+
+# Authentication
+
+Login
+
+```
+POST /api/v1/auth/login
+```
+
+Example
+
+```json
+{
+  "email": "admin@infnova.com",
+  "password": "Admin@123"
+}
+```
+
+---
+
+# API Endpoints
+
+## Authentication
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/v1/auth/login |
+| GET    | /api/v1/auth/me    |
+
+## Applicants
+
+| Method | Endpoint                      |
+| ------ | ----------------------------- |
+| POST   | /api/v1/applicants            |
+| GET    | /api/v1/applicants            |
+| GET    | /api/v1/applicants/:id        |
+| PATCH  | /api/v1/applicants/:id        |
+| DELETE | /api/v1/applicants/:id        |
+| PATCH  | /api/v1/applicants/:id/status |
+| PATCH  | /api/v1/applicants/:id/notes  |
+
+## Dashboard
+
+| Method | Endpoint                  |
+| ------ | ------------------------- |
+| GET    | /api/v1/dashboard/summary |
+
+---
+
+# Business Rules
+
+- Applicant email must be unique.
+- Notes cannot exceed 1000 characters.
+- Applicants cannot move directly from Rejected to Accepted.
+- Only authenticated administrators can update or delete applicants.
+- Applicants are soft deleted.
+- Deleted applicants are excluded from dashboard statistics.
+
+---
+
+# Testing
+
+Run Unit Tests
+
+```bash
+npm run test
+```
+
+Run End-to-End Tests
+
+```bash
+npm run test:e2e
+```
+
+---
+
+# Architecture
+
+The project follows NestJS best practices.
+
+```
+Controller
+      │
+      ▼
+Service
+      │
+      ▼
+Prisma ORM
+      │
+      ▼
+PostgreSQL
+```
+
+Authentication Flow
+
+```
+Login
+
+↓
+
+JWT Generated
+
+↓
+
+Bearer Token
+
+↓
+
+JWT Guard
+
+↓
+
+Roles Guard
+
+↓
+
+Protected Endpoint
+```
+
+---
+
+# Assumptions
+
+- Only administrators can access management endpoints.
+- Applicants submit applications without authentication.
+- Soft deleted applicants remain in the database for auditing.
+- UUID is used as the primary key for all entities.
+
+---
+
+# Future Improvements
+
+- Email Notifications
+- Refresh Tokens
+- Applicant Portal
+- File Upload (CV)
+- Docker Support
+- CI/CD Pipeline
+
+---
+
+# Author
+
+**Mekuannent Biyazn**
+
+Backend Developer
+
+Built as part of the **INFNOVA Technologies Backend Internship Practical Challenge**.
