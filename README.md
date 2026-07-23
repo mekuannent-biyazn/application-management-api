@@ -76,22 +76,34 @@ Dashboard summary returns:
 # Project Structure
 
 ```text
+prisma
+|
+├── migrations
 src
 │
-├── auth
 ├── applicants
-├── dashboard
-├── users
-├── prisma
+|     ├── dto
+├── auth
+|     ├── decorators
+|     ├── dto
+|     ├── guards
+|     |     ├── jwt-auth.guard
+|     ├── interfaces
+|     ├── strategies
+|     |     ├── jwt.strategy
 ├── common
-│   ├── decorators
 │   ├── filters
 │   ├── guards
-│   ├── interceptors
-│   └── strategies
+├── dashboard
+├── prisma
+├── users
 │
 ├── app.module.ts
 └── main.ts
+test
+|
+├── app.e2e-spec.ts
+└── jest-ete.json
 ```
 
 ---
@@ -112,9 +124,9 @@ Before running the project, make sure the following are installed:
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/internship-applicant-management-api.git
+git clone https://github.com/mekuannent-biyazn/application-management-api.git
 
-cd internship-applicant-management-api
+cd application-management-api
 ```
 
 ---
@@ -223,7 +235,7 @@ npm run start:prod
 The API will be available at:
 
 ```text
-http://localhost:3000/api/v1
+http://localhost:3000/api
 ```
 
 Swagger Documentation:
@@ -239,7 +251,7 @@ http://localhost:3000/docs
 Login endpoint
 
 ```http
-POST /api/v1/auth/login
+POST /api/auth/login
 ```
 
 Example request
@@ -265,32 +277,32 @@ Bearer YOUR_ACCESS_TOKEN
 
 ## Authentication
 
-| Method | Endpoint           |
-| ------ | ------------------ |
-| POST   | /api/v1/auth/login |
-| GET    | /api/v1/auth/me    |
+| Method | Endpoint        |
+| ------ | --------------- |
+| POST   | /api/auth/login |
+| GET    | /api/auth/me    |
 
 ---
 
 ## Applicants
 
-| Method | Endpoint                      |
-| ------ | ----------------------------- |
-| POST   | /api/v1/applicants            |
-| GET    | /api/v1/applicants            |
-| GET    | /api/v1/applicants/:id        |
-| PATCH  | /api/v1/applicants/:id        |
-| DELETE | /api/v1/applicants/:id        |
-| PATCH  | /api/v1/applicants/:id/status |
-| PATCH  | /api/v1/applicants/:id/notes  |
+| Method | Endpoint                   |
+| ------ | -------------------------- |
+| POST   | /api/applicants            |
+| GET    | /api/applicants            |
+| GET    | /api/applicants/:id        |
+| PATCH  | /api/applicants/:id        |
+| DELETE | /api/applicants/:id        |
+| PATCH  | /api/applicants/:id/status |
+| PATCH  | /api/applicants/:id/notes  |
 
 ---
 
 ## Dashboard
 
-| Method | Endpoint                  |
-| ------ | ------------------------- |
-| GET    | /api/v1/dashboard/summary |
+| Method | Endpoint               |
+| ------ | ---------------------- |
+| GET    | /api/dashboard/summary |
 
 ---
 
@@ -299,7 +311,7 @@ Bearer YOUR_ACCESS_TOKEN
 The applicant list endpoint supports the following query parameters.
 
 ```text
-GET /api/v1/applicants
+GET /api/applicants
 ```
 
 | Parameter | Description             |
@@ -315,7 +327,7 @@ GET /api/v1/applicants
 Example:
 
 ```http
-GET /api/v1/applicants?page=1&limit=10&search=abel&status=PENDING&track=BACKEND&sortBy=createdAt&order=desc
+GET /api/applicants?page=1&limit=10&search=abel&status=PENDING&track=BACKEND&sortBy=createdAt&order=desc
 ```
 
 ---
