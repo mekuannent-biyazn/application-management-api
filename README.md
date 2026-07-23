@@ -2,20 +2,19 @@
 
 Backend Internship Practical Challenge for **INFNOVA Technologies**.
 
-A RESTful API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for managing internship applications. The system provides secure JWT authentication, applicant management, search, filtering, pagination, dashboard statistics, and interactive API documentation using Swagger.
+A RESTful API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for managing internship applications. The application provides secure JWT authentication, applicant management, search, filtering, sorting, pagination, dashboard statistics, and interactive API documentation using Swagger.
 
 ---
 
-## Features
+# Features
 
-### Authentication
+## Authentication
 
-- JWT Authentication
+- JWT Bearer Authentication
 - Secure password hashing using bcrypt
-- Bearer Token Authorization
-- Role-Based Access Control (Admin)
+- Role-Based Authorization (Administrator)
 
-### Applicant Management
+## Applicant Management
 
 - Create Applicant
 - Get All Applicants
@@ -25,18 +24,18 @@ A RESTful API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for mana
 - Update Applicant Status
 - Update Internal Notes
 
-### Search & Filtering
+## Search & Filtering
 
-- Search by Name
-- Search by Email
-- Filter by Status
-- Filter by Internship Track
-- Sorting
+- Search by applicant name
+- Search by email
+- Filter by status
+- Filter by internship track
+- Sort results
 - Pagination
 
-### Dashboard
+## Dashboard
 
-Returns:
+Dashboard summary returns:
 
 - Total Applicants
 - Pending Applicants
@@ -44,22 +43,22 @@ Returns:
 - Accepted Applicants
 - Rejected Applicants
 
-### Validation & Security
+## Validation & Security
 
 - DTO Validation
 - Global Validation Pipe
 - Global Exception Filter
 - UUID Validation
-- Soft Delete
 - Unique Email Validation
+- Soft Delete
 
-### Documentation
+## Documentation
 
 - Swagger / OpenAPI Documentation
 
 ---
 
-# Technologies
+# Technology Stack
 
 - NestJS
 - TypeScript
@@ -69,26 +68,27 @@ Returns:
 - Passport
 - bcrypt
 - Swagger
-- Class Validator
-- Class Transformer
+- class-validator
+- class-transformer
 
 ---
 
 # Project Structure
 
-```
+```text
 src
 │
 ├── auth
-├── users
 ├── applicants
 ├── dashboard
+├── users
 ├── prisma
 ├── common
 │   ├── decorators
 │   ├── filters
 │   ├── guards
-│   └── interceptors
+│   ├── interceptors
+│   └── strategies
 │
 ├── app.module.ts
 └── main.ts
@@ -96,21 +96,30 @@ src
 
 ---
 
+# Prerequisites
+
+Before running the project, make sure the following are installed:
+
+- Node.js (v22 or later)
+- npm
+- PostgreSQL
+- Git
+
+---
+
 # Installation
 
-Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/internship-applicant-management-api.git
-```
 
-Move into the project
-
-```bash
 cd internship-applicant-management-api
 ```
 
-Install dependencies
+---
+
+## 2. Install dependencies
 
 ```bash
 npm install
@@ -118,11 +127,33 @@ npm install
 
 ---
 
-# Environment Variables
+## 3. Create PostgreSQL Database
 
-Create a `.env` file.
+Create a database named:
 
-Example:
+```text
+internship_applicant_db
+```
+
+or use any database name and update the connection string accordingly.
+
+---
+
+## 4. Configure Environment Variables
+
+Copy the example file.
+
+```bash
+cp .env.example .env
+```
+
+If you're on Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Update the values.
 
 ```env
 PORT=3000
@@ -138,29 +169,43 @@ JWT_EXPIRES_IN=1d
 
 ---
 
-# Database
-
-Generate Prisma Client
+## 5. Generate Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
-Run Migrations
+---
+
+## 6. Run Database Migrations
 
 ```bash
 npx prisma migrate dev
 ```
 
-Seed Database
+---
+
+## 7. Seed the Database
 
 ```bash
 npx prisma db seed
 ```
 
+This command creates the default administrator account.
+
+**Administrator Credentials**
+
+```text
+Email:
+admin@infnova.com
+
+Password:
+Admin@123
+```
+
 ---
 
-# Running the Project
+## 8. Start the Application
 
 Development
 
@@ -172,45 +217,46 @@ Production
 
 ```bash
 npm run build
-
 npm run start:prod
 ```
 
----
+The API will be available at:
 
-# Swagger Documentation
-
-Open
-
+```text
+http://localhost:3000/api/v1
 ```
+
+Swagger Documentation:
+
+```text
 http://localhost:3000/docs
-```
-
-Use the **Authorize** button and paste your JWT token.
-
-Example
-
-```
-Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
 ---
 
 # Authentication
 
-Login
+Login endpoint
 
-```
+```http
 POST /api/v1/auth/login
 ```
 
-Example
+Example request
 
 ```json
 {
   "email": "admin@infnova.com",
   "password": "Admin@123"
 }
+```
+
+After login, copy the returned JWT access token.
+
+Click the **Authorize** button in Swagger and enter:
+
+```text
+Bearer YOUR_ACCESS_TOKEN
 ```
 
 ---
@@ -224,6 +270,8 @@ Example
 | POST   | /api/v1/auth/login |
 | GET    | /api/v1/auth/me    |
 
+---
+
 ## Applicants
 
 | Method | Endpoint                      |
@@ -236,6 +284,8 @@ Example
 | PATCH  | /api/v1/applicants/:id/status |
 | PATCH  | /api/v1/applicants/:id/notes  |
 
+---
+
 ## Dashboard
 
 | Method | Endpoint                  |
@@ -244,9 +294,35 @@ Example
 
 ---
 
+# Query Parameters
+
+The applicant list endpoint supports the following query parameters.
+
+```text
+GET /api/v1/applicants
+```
+
+| Parameter | Description             |
+| --------- | ----------------------- |
+| page      | Current page            |
+| limit     | Items per page          |
+| search    | Search by name or email |
+| status    | Applicant status        |
+| track     | Internship track        |
+| sortBy    | Field to sort           |
+| order     | asc or desc             |
+
+Example:
+
+```http
+GET /api/v1/applicants?page=1&limit=10&search=abel&status=PENDING&track=BACKEND&sortBy=createdAt&order=desc
+```
+
+---
+
 # Business Rules
 
-- Applicant email must be unique.
+- Applicant email addresses must be unique.
 - Notes cannot exceed 1000 characters.
 - Applicants cannot move directly from Rejected to Accepted.
 - Only authenticated administrators can update or delete applicants.
@@ -275,42 +351,35 @@ npm run test:e2e
 
 The project follows NestJS best practices.
 
-```
+```text
 Controller
       │
-      ▼
+Validation
+      │
+Authentication Guard
+      │
+Authorization Guard
+      │
 Service
       │
-      ▼
 Prisma ORM
       │
-      ▼
 PostgreSQL
 ```
 
 Authentication Flow
 
-```
-Login
-
-↓
-
-JWT Generated
-
-↓
-
+```text
+Administrator Login
+        │
+Generate JWT
+        │
 Bearer Token
-
-↓
-
+        │
 JWT Guard
-
-↓
-
+        │
 Roles Guard
-
-↓
-
+        │
 Protected Endpoint
 ```
 
@@ -318,21 +387,21 @@ Protected Endpoint
 
 # Assumptions
 
-- Only administrators can access management endpoints.
+- Only administrators can manage applicants.
 - Applicants submit applications without authentication.
-- Soft deleted applicants remain in the database for auditing.
+- Soft deleted applicants remain in the database for auditing purposes.
 - UUID is used as the primary key for all entities.
 
 ---
 
 # Future Improvements
 
-- Email Notifications
-- Refresh Tokens
-- Applicant Portal
-- File Upload (CV)
-- Docker Support
-- CI/CD Pipeline
+- Applicant authentication
+- Email notifications
+- Refresh tokens
+- File upload (CV)
+- Docker Compose
+- CI/CD pipeline
 
 ---
 
@@ -343,3 +412,9 @@ Protected Endpoint
 Backend Developer
 
 Built as part of the **INFNOVA Technologies Backend Internship Practical Challenge**.
+
+---
+
+# License
+
+This project is provided for educational and recruitment evaluation purposes.
