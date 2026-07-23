@@ -46,11 +46,12 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  await app.listen(process.env.PORT ?? 3000);
+  if (!process.env.PORT) {
+    throw new Error('PORT environment variable is not defined');
+  }
+  await app.listen(process.env.PORT);
 
-  console.log(
-    `🚀 Server running on http://localhost:${process.env.PORT ?? 3000}`,
-  );
+  console.log(`🚀 Server running on http://localhost:${process.env.PORT}`);
 }
 
 bootstrap();
