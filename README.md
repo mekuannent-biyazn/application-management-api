@@ -47,6 +47,35 @@ Dashboard summary returns:
 - Shortlisted Applicants
 - Accepted Applicants
 - Rejected Applicants
+- Frontend Applicants
+- Backend Applicants
+- Mobile Applicants
+- UI/UX Applicants
+- DataAnalytics Applicants
+
+Example Response body
+
+```json
+{
+  "success": true,
+  "data": {
+    "totalApplicants": 2,
+    "byStatus": {
+      "pending": 0,
+      "shortlisted": 0,
+      "accepted": 1,
+      "rejected": 1
+    },
+    "byTrack": {
+      "frontend": 1,
+      "backend": 1,
+      "mobile": 0,
+      "uiux": 0,
+      "dataAnalytics": 0
+    }
+  }
+}
+```
 
 ## Validation & Security
 
