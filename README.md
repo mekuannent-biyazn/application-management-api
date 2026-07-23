@@ -16,7 +16,12 @@ A RESTful API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for mana
 
 ## Applicant Management
 
+### Public End-point
+
 - Create Applicant
+
+### Protected End-point for 'ADMIN' only
+
 - Get All Applicants
 - Get Applicant By ID
 - Update Applicant
